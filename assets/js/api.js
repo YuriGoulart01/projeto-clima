@@ -1,24 +1,24 @@
 export async function getWeatherByCity(city) {
-  // 1️⃣ Geocoding: cidade → latitude/longitude
-  const geoResponse = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=pt&format=json`
+  const geoRes = await fetch(
+    `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=pt`
   );
-  const geoData = await geoResponse.json();
+  const geoData = await geoRes.json();
 
   if (!geoData.results) {
-    throw new Error("Cidade não encontrada");
+    throw new Error("Cidade não encontrada.");
   }
 
   const { latitude, longitude, name } = geoData.results[0];
 
-  // 2️⃣ Buscar clima
-  const weatherResponse = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+  const weatherRes = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto`
   );
-  const weatherData = await weatherResponse.json();
+
+  const weatherData = await weatherRes.json();
 
   return {
     city: name,
-    temperature: weatherData.current_weather.temperature
+    current: weatherData.current_weather,
+    daily: weatherData.daily
   };
 }

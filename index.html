@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>App de Clima</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <title>Clima App</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-  <div class="container">
-    <h2>🌤 Clima</h2>
+<main class="app">
+  <header class="header">
+    <h1>Clima</h1>
+    <button id="themeToggle">🌙</button>
+  </header>
 
-    <input type="text" id="cityInput" placeholder="Digite a cidade">
+  <section class="card">
+    <input id="cityInput" placeholder="Digite a cidade" />
     <button id="searchBtn">Buscar</button>
 
-    <div class="result" id="result"></div>
-  </div>
+    <div id="currentWeather"></div>
+  </section>
 
-  <script type="module" src="assets/js/main.js"></script>
+  <section class="forecast-card">
+    <h2>Próximos 7 dias</h2>
+    <div id="forecast" class="forecast-scroll"></div>
+  </section>
+</main>
+
+<script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

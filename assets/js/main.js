@@ -1,21 +1,30 @@
 import { getWeatherByCity } from "./api.js";
 import { renderWeather, renderError } from "./ui.js";
 
+const input = document.getElementById("cityInput");
 const button = document.getElementById("searchBtn");
+const themeToggle = document.getElementById("themeToggle");
 
-button.addEventListener("click", async () => {
-  const city = document.getElementById("cityInput").value.trim();
+button.onclick = search;
+themeToggle.onclick = toggleTheme;
 
-  if (!city) {
-    renderError("Digite o nome de uma cidade.");
-    return;
-  }
+function toggleTheme() {
+  const theme =
+    document.documentElement.getAttribute("data-theme") === "dark"
+      ? "light"
+      : "dark";
 
+  document.documentElement.setAttribute("data-theme", theme);
+}
+
+async function search() {
   try {
-    const weatherData = await getWeatherByCity(city);
-    renderWeather(weatherData);
-  } catch (error) {
-    renderError("Erro ao buscar dados do clima.");
-    console.error(error);
+    const city = input.value.trim();
+    if (!city) return;
+
+    const data = await getWeatherByCity(city);
+    renderWeather(data);
+  } catch (err) {
+    renderError(err.message);
   }
-});
+}

@@ -1,42 +1,110 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #e0f2fe;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+:root {
+  --text: #0f172a;
+  --glass: rgba(255,255,255,0.75);
 }
 
-.container {
-  background: white;
+[data-theme="dark"] {
+  --text: #e5e7eb;
+  --glass: rgba(2,6,23,0.75);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.6s ease;
+  color: var(--text);
+}
+
+.app {
+  max-width: 420px;
+  margin: auto;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.header button {
+  background: rgba(0,0,0,0.3);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  color: white;
+  cursor: pointer;
+}
+
+.card,
+.forecast-card {
+  backdrop-filter: blur(14px);
+  background: var(--glass);
+  border-radius: 22px;
   padding: 20px;
-  border-radius: 8px;
-  width: 300px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-top: 16px;
 }
 
 input {
   width: 100%;
-  padding: 8px;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
   margin-bottom: 10px;
 }
 
-button {
+button#searchBtn {
   width: 100%;
-  padding: 8px;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
   background: #0284c7;
   color: white;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #0369a1;
+.weather-icon svg {
+  width: 90px;
+  height: 90px;
 }
 
-.result {
-  margin-top: 15px;
-  font-size: 18px;
+#currentWeather {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.forecast-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.forecast-day {
+  min-width: 110px;
+  text-align: center;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.25);
+}
+
+[data-theme="dark"] .forecast-day {
+  background: rgba(255,255,255,0.08);
+}
+
+.forecast-day svg {
+  width: 48px;
+  height: 48px;
+}
+
+.temp {
+  font-size: 14px;
 }
